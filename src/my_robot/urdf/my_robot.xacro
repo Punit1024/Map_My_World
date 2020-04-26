@@ -2,6 +2,14 @@
 
 <robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 <xacro:include filename="$(find my_robot)/urdf/my_robot.gazebo" />
+
+ <!-- Length along X-axis, Width along Y-axis, Height along Z-axis -->
+  <xacro:property name="wheel_radius" value="0.075" />
+  <xacro:property name="wheel_track" value="0.3" />
+  <xacro:property name="wheel_base" value="0.3" />
+  <xacro:property name="wheel_width" value="0.05" />
+
+
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
   </material>
@@ -65,7 +73,7 @@
   </link>
 
   <joint type="continuous" name="left_front_wheel_hinge">
-    <origin xyz="0.125 0.15 0" rpy="0 0 0"/>
+    <origin xyz="${wheel_base/2} ${wheel_track/2} 0" rpy="0 0 0"/>
     <child link="left_front_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -89,14 +97,14 @@
     <collision name='left_front_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+        <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
     </collision>
 
     <visual name='left_front_wheel_visual'>
        <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -105,7 +113,7 @@
   
 
   <joint type="continuous" name="left_rear_wheel_hinge">
-    <origin xyz="-0.125 0.15 0" rpy="0 0 0"/>
+    <origin xyz="-${wheel_base/2} ${wheel_track/2} 0" rpy="0 0 0"/>
     <child link="left_rear_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -129,14 +137,14 @@
     <collision name='left_rear_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
     </collision>
 
     <visual name='left_rear_wheel_visual'>
        <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -144,7 +152,7 @@
   </link>
 
  <joint type="continuous" name="right_front_wheel_hinge">
-    <origin xyz="0.125 -0.15 0" rpy="0 0 0"/>
+    <origin xyz="${wheel_base/2} -${wheel_track/2} 00" rpy="0 0 0"/>
     <child link="right_front_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -168,14 +176,14 @@
     <collision name='right_front_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
     </collision>
 
     <visual name='right_front_wheel_visual'>
        <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -183,7 +191,7 @@
   </link>
 
  <joint type="continuous" name="right_rear_wheel_hinge">
-    <origin xyz="-0.125 -0.15 0" rpy="0 0 0"/>
+    <origin xyz="-${wheel_base/2} -${wheel_track/2} 0" rpy="0 0 0"/>
     <child link="right_rear_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -207,14 +215,14 @@
     <collision name='right_rear_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
     </collision>
 
     <visual name='right_rear_wheel_visual'>
        <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder  radius="0.075" length="0.05"/>
+         <cylinder  radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
       <material name="blue"/>
     </visual>

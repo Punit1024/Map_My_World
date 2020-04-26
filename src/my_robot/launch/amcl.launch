@@ -7,32 +7,76 @@
   <arg name="yaw" default="0"/>
 
 
-<!-- Map Server -->
-<arg name="map_file" default="$(find my_robot)/maps/outmap.yaml"/>
-<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+<!-- Map Server  -->
+
+ <arg name="map_file" default="$(find my_robot)/maps/outmap.yaml"/>
+ <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
   <!-- AMCL Node -->
+
  <node name="amcl" pkg="amcl" type="amcl" output="screen">
- <remap from="scan" to="my_robot/laser/scan"/>
- <param name="odom_frame_id" value="odom"/>
+ <!-- <remap from="scan" to="/scan"/> -->
+
+
+ <param name="odom_frame_id" value="/odom"/>
+  
+
   <param name="odom_model_type" value="diff-corrected"/>
+<!-- odom_model_type Which model to use, either "diff", "omni", "diff-corrected" or "omni-corrected". -->
+
+
   <param name="base_frame_id" value="robot_footprint"/>
+
   <param name="global_frame_id" value="map"/>
-<param name="initial_pose_x" value="$(arg x)"/>
-<param name="initial_pose_y" value="$(arg y)"/>
+
+  <param name="initial_pose_x" value="$(arg x)"/>
+
+  <param name="initial_pose_y" value="$(arg y)"/>
+
+  <param name="initial_pose_a" value="$(arg yaw)"/>
+
+  <param name="min_particles" value="1000"/>
+  <!-- min_particles (int, default: 100) Minimum allowed number of particles.  -->
+
+  <param name="max_particles" value="5000"/>
+  <!-- max_particles (int, default: 5000) Maximum allowed number of particles. --> 
+
+  <param name="kld_err" value="0.01"/>
+  <!-- kld_err (double, default: 0.01) Maximum error between the true distribution and the estimated distribution. -->
+
+  <param name="update_min_d" value="0.02"/>
+  <!-- update_min_d (double, default: 0.2 meters) Translational movement required before performing a filter update. -->
+
+  <param name="update_min_a" value="0.1"/>
+  <!-- update_min_a (double, default: π/6.0 radians) Rotational movement required before performing a filter update. -->
+
+  <param name="resample_interval" value="2"/>
+  <!-- resample_interval (int, default: 2) Number of filter updates required before resampling. -->
+
+  <param name="transform_tolerance" value="0.1"/>
+  <!-- transform_tolerance (double, default: 0.1 seconds) Time with which to post-date the transform that is published, to indicate that this transform is valid into the future. -->
+
+  <param name="gui_publish_rate" value="-1.0"/>
+  <!-- gui_publish_rate (double, default: -1.0 Hz) Maximum rate (Hz) at which scans and paths are published for visualization, -1.0 to disable. -->
+
+  <param name="odom_alpha1" value="0.2)"/>
+  <!-- odom_alpha1 (double, default: 0.2) Specifies the expected noise in odometry's rotation estimate from the rotational component of the robot's -->
+
   </node>
 
 
 
 <!-- Move Base -->
+
   <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
-<remap from="scan" to="my_robot/laser/scan"/>
+<!-- <remap from="scan" to="my_robot/laser/scan"/> -->
   <param name="base_global_planner" value="navfn/NavfnROS" />
   <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
-  <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+  <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load"  ns="global_costmap" />
   <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
   <rosparam file="$(find my_robot)/config/local_costmap_params.yaml" command="load" />
   <rosparam file="$(find my_robot)/config/global_costmap_params.yaml" command="load" />
-  <rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
-  </node>
+ <rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
+ </node>
 
 </launch>
