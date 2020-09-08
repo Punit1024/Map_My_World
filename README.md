@@ -1,4 +1,4 @@
-# ball_chaser
+# Map_My_World
 ROS package that processes image published by [my_robot](https://github.com/Punit1024/GO_CHASE_IT_my_robot) and publishes on topic  `\cmd_vel` which commands my_robot to move
 contains to nodes
 - process_image
@@ -10,18 +10,18 @@ contains to nodes
 #### Clone the workspace in your prefered location
 ```sh
 $ cd /home/workspace
-$ git clone https://github.com/Punit1024/GO_CHASE_IT.git my_robot
+$ git clone https://github.com/Punit1024/Map_My_World.git
 ```
 
 #### Build the packages
 ```sh
-$ cd /home/workspace/catkin_ws/ 
+$ cd /home/workspace/Map_My_World/ 
 $ catkin_make
 ```
 
 #### After building the package, source your environment
 ```sh
-$ cd /home/workspace/catkin_ws/
+$ cd /home/workspace/Map_My_World/
 $ source devel/setup.bash
 ```
 
@@ -36,12 +36,15 @@ $ roslaunch my_robot world.launch
 ```
  Inside another terminal launch ball_chaser nodes
 ```sh
-$ cd /home/workspace/catkin_ws/
+$ cd /home/workspace/Map_My_World/
 $ source devel/setup.bash
-$ roslaunch ball_chaser ball_chaser.launch
+$ roslaunch my_robot mapping.launch
 ```
 
 #### How to command robot ?
-There is a model of white ball, outside office building in Gazebo, you can drag the ball around and the robot will chase it, if it's in the range of camera vision
-
-
+you can control the bot using teleop package in another terminal, launch teleop node:
+```sh
+$ rosrun teleop_twist_keyboard teleop_twist_keyboard.py _speed:=0.9 _turn:=0.8
+```
+#### Sample output :
+find map and database generated from this packages in /Generated_db folder
