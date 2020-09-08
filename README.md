@@ -1,8 +1,8 @@
 # Map_My_World
-ROS package that processes image published by [my_robot](https://github.com/Punit1024/GO_CHASE_IT_my_robot) and publishes on topic  `\cmd_vel` which commands my_robot to move
-contains to nodes
-- process_image
-- drive_bot
+
+## WHere to find binaries/ Generated output ?
+[Releases](https://github.com/Punit1024/Map_My_World/releases/)
+
 
 ## How to Launch the simulation?
 
